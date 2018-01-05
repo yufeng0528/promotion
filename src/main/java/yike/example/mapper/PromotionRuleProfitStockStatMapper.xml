@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yike.example.mapper.PromotionRuleProfitStockStatMapper">
+  <resultMap id="BaseResultMap" type="yike.example.obj.PromotionRuleProfitStockStat">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="supplier_id" jdbcType="BIGINT" property="supplierId" />
+    <result column="promotion_id" jdbcType="BIGINT" property="promotionId" />
+    <result column="promotion_rule_profit_id" jdbcType="BIGINT" property="promotionRuleProfitId" />
+    <result column="count" jdbcType="BIGINT" property="count" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, supplier_id, promotion_id, promotion_rule_profit_id, count
+  </sql>
+  <select id="selectByExample" parameterType="yike.example.obj.PromotionRuleProfitStockStatCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from promotion_rule_profit_stock_stat
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="offset != null and offset >= 0 and limit != null and limit>=0">
+      limit ${offset} , ${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from promotion_rule_profit_stock_stat
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from promotion_rule_profit_stock_stat
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="yike.example.obj.PromotionRuleProfitStockStat" useGeneratedKeys="true">
+    insert into promotion_rule_profit_stock_stat (supplier_id, promotion_id, promotion_rule_profit_id, 
+      count)
+    values (#{supplierId,jdbcType=BIGINT}, #{promotionId,jdbcType=BIGINT}, #{promotionRuleProfitId,jdbcType=BIGINT}, 
+      #{count,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="yike.example.obj.PromotionRuleProfitStockStat" useGeneratedKeys="true">
+    insert into promotion_rule_profit_stock_stat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="promotionId != null">
+        promotion_id,
+      </if>
+      <if test="promotionRuleProfitId != null">
+        promotion_rule_profit_id,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionId != null">
+        #{promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionRuleProfitId != null">
+        #{promotionRuleProfitId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="yike.example.obj.PromotionRuleProfitStockStatCriteria" resultType="java.lang.Long">
+    select count(*) from promotion_rule_profit_stock_stat
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="yike.example.obj.PromotionRuleProfitStockStat">
+    update promotion_rule_profit_stock_stat
+    <set>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionId != null">
+        promotion_id = #{promotionId,jdbcType=BIGINT},
+      </if>
+      <if test="promotionRuleProfitId != null">
+        promotion_rule_profit_id = #{promotionRuleProfitId,jdbcType=BIGINT},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="yike.example.obj.PromotionRuleProfitStockStat">
+    update promotion_rule_profit_stock_stat
+    set supplier_id = #{supplierId,jdbcType=BIGINT},
+      promotion_id = #{promotionId,jdbcType=BIGINT},
+      promotion_rule_profit_id = #{promotionRuleProfitId,jdbcType=BIGINT},
+      count = #{count,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
