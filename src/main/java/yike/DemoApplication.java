@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  *
  */
 @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
-@MapperScan("yike.**.dao,yike.**.mapper")
+@MapperScan("yike.example.mapper")
 public class DemoApplication extends WebMvcConfigurationSupport {
 	
 	public ThreadPoolTaskExecutor getAsyncExecutor() {
