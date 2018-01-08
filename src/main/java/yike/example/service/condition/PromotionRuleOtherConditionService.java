@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,14 @@ public class PromotionRuleOtherConditionService {
 		
 		Map<PromotionRuleBO, List<CartStockDTO>> newPromotionContext = new HashMap<>(rules.size());
 		for (PromotionRuleBO promotionRuleBO : rules) {
-			IPromotionRuleOtherService iPromotionRuleOtherService = otherConditionServiceFactory.getRuleOtherService(promotionRuleBO.getPromotionRule().getType());
+			IPromotionRuleOtherService iPromotionRuleOtherService = otherConditionServiceFactory.getRuleOtherService(promotionRuleBO.getPromotionRule().getType(), promotionRuleBO.getPromotionRule().getSubType());
 			if (iPromotionRuleOtherService != null) {
 				boolean pass = iPromotionRuleOtherService.filterByOtherRule(promotionRuleBO, PromotionContext.getCartCustomer(), promotionContext.get(promotionContext));
 				if (pass) {
 					newPromotionContext.put(promotionRuleBO, promotionContext.get(promotionContext));
 				}
+			} else {
+				throw new NotImplementedException("促销其他规则过滤" + promotionRuleBO.getPromotionRule().getType() + "_" + promotionRuleBO.getPromotionRule().getSubType() + "没有实现");
 			}
 		}
 		logger.info("结束其他规则筛选");

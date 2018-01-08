@@ -10,15 +10,21 @@ import yike.dto.CartStockDTO;
 import yike.example.constants.PromotionRuleConstants;
 
 /**
- * 特价
+ * 闪购
  * @author Administrator
  *
  */
 @Service
-public class SpecialOtherConditionService implements IPromotionRuleOtherService {
+public class FlashsaleOtherConditionService implements IPromotionRuleOtherService {
 
 	@Override
 	public Boolean filterByOtherRule(PromotionRuleBO promotionRule, CartCustomerDTO cartCustomerContext, List<CartStockDTO> promotionContext) {
+		//校验库存
+		//校验个人购买数
+		//....
+		if (cartCustomerContext.getCustomerId() == 1L) {
+			return true;
+		}
 		return false;
 	}
 
@@ -36,7 +42,7 @@ public class SpecialOtherConditionService implements IPromotionRuleOtherService 
 
 	@Override
 	public String promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_SPECIAL + "";
+		return PromotionRuleConstants.PROMOTION_RULE_TYPE_SPECIAL + "_" + PromotionRuleConstants.PROMOTION_RULE_SUBTYPE_SPECIAL_FLASHSALE;
 	}
 
 }

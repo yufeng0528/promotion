@@ -6,6 +6,7 @@
     <result column="supplier_id" jdbcType="BIGINT" property="supplierId" />
     <result column="promotion_id" jdbcType="BIGINT" property="promotionId" />
     <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="sub_type" jdbcType="INTEGER" property="subType" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -37,7 +38,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, supplier_id, promotion_id, type
+    id, supplier_id, promotion_id, type, sub_type
   </sql>
   <select id="selectByExample" parameterType="yike.example.obj.PromotionRuleCriteria" resultMap="BaseResultMap">
     select
@@ -68,10 +69,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="yike.example.obj.PromotionRule" useGeneratedKeys="true">
-    insert into promotion_rule (supplier_id, promotion_id, type
-      )
-    values (#{supplierId,jdbcType=BIGINT}, #{promotionId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}
-      )
+    insert into promotion_rule (supplier_id, promotion_id, type, 
+      sub_type)
+    values (#{supplierId,jdbcType=BIGINT}, #{promotionId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, 
+      #{subType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="yike.example.obj.PromotionRule" useGeneratedKeys="true">
     insert into promotion_rule
@@ -85,6 +86,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="subType != null">
+        sub_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="supplierId != null">
@@ -95,6 +99,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=TINYINT},
+      </if>
+      <if test="subType != null">
+        #{subType,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -116,6 +123,9 @@
       <if test="type != null">
         type = #{type,jdbcType=TINYINT},
       </if>
+      <if test="subType != null">
+        sub_type = #{subType,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -123,7 +133,8 @@
     update promotion_rule
     set supplier_id = #{supplierId,jdbcType=BIGINT},
       promotion_id = #{promotionId,jdbcType=BIGINT},
-      type = #{type,jdbcType=TINYINT}
+      type = #{type,jdbcType=TINYINT},
+      sub_type = #{subType,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

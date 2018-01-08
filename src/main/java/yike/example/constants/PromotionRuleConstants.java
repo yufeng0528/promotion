@@ -28,5 +28,7 @@ public class PromotionRuleConstants {
 	public static byte PROMOTION_RULE_TYPE_FREE_POSTFEE = 4;
 	
 	
+	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_FLASHSALE = 0;
 	
+	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_BARGIAN = 0;
 }

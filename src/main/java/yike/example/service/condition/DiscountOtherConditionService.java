@@ -35,8 +35,8 @@ public class DiscountOtherConditionService implements IPromotionRuleOtherService
 	}
 
 	@Override
-	public Byte promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_DISCOUNT;
+	public String promotionRuleType() {
+		return PromotionRuleConstants.PROMOTION_RULE_TYPE_DISCOUNT + "";
 	}
 
 }

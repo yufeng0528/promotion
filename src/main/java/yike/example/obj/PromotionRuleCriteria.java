@@ -368,6 +368,66 @@ public class PromotionRuleCriteria {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
+
+        public Criteria andSubTypeIsNull() {
+            addCriterion("sub_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeIsNotNull() {
+            addCriterion("sub_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeEqualTo(Integer value) {
+            addCriterion("sub_type =", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeNotEqualTo(Integer value) {
+            addCriterion("sub_type <>", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeGreaterThan(Integer value) {
+            addCriterion("sub_type >", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sub_type >=", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeLessThan(Integer value) {
+            addCriterion("sub_type <", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("sub_type <=", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeIn(List<Integer> values) {
+            addCriterion("sub_type in", values, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeNotIn(List<Integer> values) {
+            addCriterion("sub_type not in", values, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeBetween(Integer value1, Integer value2) {
+            addCriterion("sub_type between", value1, value2, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("sub_type not between", value1, value2, "subType");
+            return (Criteria) this;
+        }
     }
 
     /**

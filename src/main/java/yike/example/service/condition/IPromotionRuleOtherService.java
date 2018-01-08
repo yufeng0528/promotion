@@ -27,8 +27,8 @@ public interface IPromotionRuleOtherService {
 	Boolean useStock(Long orderId, Long promotionStockId);
 	
 	/**
-	 * 具体规则promotion_rule的type
+	 * 具体规则promotion_rule的type+sub_type
 	 * @return
 	 */
-	Byte promotionRuleType();
+	String promotionRuleType();
 }

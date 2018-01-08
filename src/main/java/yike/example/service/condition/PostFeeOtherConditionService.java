@@ -35,8 +35,8 @@ public class PostFeeOtherConditionService implements IPromotionRuleOtherService 
 	}
 
 	@Override
-	public Byte promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_FREE_POSTFEE;
+	public String promotionRuleType() {
+		return PromotionRuleConstants.PROMOTION_RULE_TYPE_FREE_POSTFEE + "";
 	}
 
 }

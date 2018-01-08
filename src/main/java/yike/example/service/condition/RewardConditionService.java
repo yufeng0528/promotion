@@ -36,8 +36,8 @@ public class RewardConditionService implements IPromotionRuleOtherService {
 	}
 
 	@Override
-	public Byte promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_REWARD;
+	public String promotionRuleType() {
+		return PromotionRuleConstants.PROMOTION_RULE_TYPE_REWARD + "";
 	}
 
 }

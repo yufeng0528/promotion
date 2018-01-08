@@ -35,8 +35,8 @@ public class CashierOtherConditionService implements IPromotionRuleOtherService 
 	}
 
 	@Override
-	public Byte promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_CASHIER;
+	public String promotionRuleType() {
+		return PromotionRuleConstants.PROMOTION_RULE_TYPE_CASHIER + "";
 	}
 
 }

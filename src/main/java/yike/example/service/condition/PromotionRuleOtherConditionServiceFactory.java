@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PromotionRuleOtherConditionServiceFactory implements  ApplicationContextAware{
 
-	Map<Byte, IPromotionRuleOtherService> ruleOtherServiceMap = null;
+	Map<String, IPromotionRuleOtherService> ruleOtherServiceMap = null;
 	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		ruleOtherServiceMap = new HashMap<Byte, IPromotionRuleOtherService>();
+		ruleOtherServiceMap = new HashMap<String, IPromotionRuleOtherService>();
 		
 		Map<String, IPromotionRuleOtherService> map = applicationContext.getBeansOfType(IPromotionRuleOtherService.class);
 		
@@ -28,7 +28,7 @@ public class PromotionRuleOtherConditionServiceFactory implements  ApplicationCo
 		
 	}
 	
-	public IPromotionRuleOtherService getRuleOtherService(Byte promotionRuleType) {
-		return ruleOtherServiceMap.get(promotionRuleType);
+	public IPromotionRuleOtherService getRuleOtherService(Byte promotionRuleType, Integer promotionRuleSubType) {
+		return ruleOtherServiceMap.get(promotionRuleType + "_" + promotionRuleSubType);
 	}
 }

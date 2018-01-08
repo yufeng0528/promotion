@@ -19,6 +19,8 @@ public class PromotionRule {
      */
     private Byte type;
 
+    private Integer subType;
+
     public Long getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class PromotionRule {
 
     public void setType(Byte type) {
         this.type = type;
+    }
+
+    public Integer getSubType() {
+        return subType;
+    }
+
+    public void setSubType(Integer subType) {
+        this.subType = subType;
     }
 }
