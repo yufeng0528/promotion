@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartCustomerDTO;
 import yike.dto.CartStockDTO;
-import yike.example.constants.PromotionRuleConstants;
+import yike.example.service.rule.BaseBargainRuleService;
 
 /**
  * 特价
@@ -15,7 +15,7 @@ import yike.example.constants.PromotionRuleConstants;
  *
  */
 @Service
-public class BargainOtherConditionService implements IPromotionRuleOtherService {
+public class BargainOtherConditionService extends BaseBargainRuleService implements IPromotionRuleOtherService {
 
 	@Override
 	public Boolean filterByOtherRule(PromotionRuleBO promotionRule, CartCustomerDTO cartCustomerContext, List<CartStockDTO> promotionContext) {
@@ -38,11 +38,6 @@ public class BargainOtherConditionService implements IPromotionRuleOtherService 
 	public Boolean useStock(Long orderId, Long promotionStockId) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_SPECIAL + "_" + PromotionRuleConstants.PROMOTION_RULE_SUBTYPE_SPECIAL_BARGIAN;
 	}
 
 }

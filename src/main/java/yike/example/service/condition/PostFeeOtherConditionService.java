@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartCustomerDTO;
 import yike.dto.CartStockDTO;
-import yike.example.constants.PromotionRuleConstants;
+import yike.example.constants.PromotionConstants;
 
 /**
  * 包邮
@@ -36,7 +36,7 @@ public class PostFeeOtherConditionService implements IPromotionRuleOtherService 
 
 	@Override
 	public String promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_FREE_POSTFEE + "";
+		return PromotionConstants.PROMOTION_RULE_TYPE_FREE_POSTFEE + "";
 	}
 
 }

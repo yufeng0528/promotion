@@ -5,8 +5,9 @@ import java.util.List;
 import yike.bo.PromotionProfitBO;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartStockDTO;
+import yike.example.service.IPromotionRuleService;
 
-public interface IPromotionRuleProfitService {
+public interface IPromotionRuleProfitService extends IPromotionRuleService {
 
 	/**
 	 * 处理优惠

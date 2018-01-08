@@ -1,6 +1,6 @@
 package yike.example.constants;
 
-public class PromotionRuleConstants {
+public class PromotionConstants {
 
 	/**
 	 * 赠品
@@ -30,5 +30,8 @@ public class PromotionRuleConstants {
 	
 	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_FLASHSALE = 0;
 	
-	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_BARGIAN = 0;
+	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_BARGIAN = 1;
+	
+	public static int PROMOTION_PRIORITY_EXCLUDE = 0;
+	
 }

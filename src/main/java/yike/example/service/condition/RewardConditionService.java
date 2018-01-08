@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartCustomerDTO;
 import yike.dto.CartStockDTO;
-import yike.example.constants.PromotionRuleConstants;
+import yike.example.constants.PromotionConstants;
 
 /**
  * 送礼品（实物，积分，优惠券）
@@ -37,7 +37,7 @@ public class RewardConditionService implements IPromotionRuleOtherService {
 
 	@Override
 	public String promotionRuleType() {
-		return PromotionRuleConstants.PROMOTION_RULE_TYPE_REWARD + "";
+		return PromotionConstants.PROMOTION_RULE_TYPE_REWARD + "";
 	}
 
 }

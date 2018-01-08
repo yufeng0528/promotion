@@ -5,13 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import yike.example.mapper.PromotionInfoMapper;
 import yike.example.obj.PromotionInfo;
 import yike.example.obj.PromotionInfoCriteria;
 
-@Service
+@Component
 public class PromotionInfoDao {
 
 	@Resource

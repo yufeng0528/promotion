@@ -2,11 +2,11 @@ package yike.example.service.profit;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Service;
 
@@ -17,28 +17,45 @@ import com.google.common.collect.Multimaps;
 import yike.bo.PromotionProfitBO;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartStockDTO;
+import yike.example.constants.PromotionConstants;
 
 @Service
 public class BasePromotionRuleProfitService {
 
+	/**
+	 * 得到所有优惠收益
+	 * <br>
+	 * 对于排他性优惠
+	 * @param promotionContext
+	 * @return
+	 */
 	public PromotionProfitBO getProfit(Map<PromotionRuleBO, List<CartStockDTO>> promotionContext) {
 		if (promotionContext.isEmpty()) {
 			return null;
 		}
+		
 		PromotionProfitBO promotionProfitBO = new PromotionProfitBO();
+		Map<Integer, Collection<PromotionRuleBO>> sortedMap = sortByPriority(promotionContext);
+		for (Iterator<Integer> it = sortedMap.keySet().iterator(); it.hasNext();) {
+			Integer priority = it.next();
+			Collection<PromotionRuleBO> ruleBOs = sortedMap.get(priority);
+			
+			if (priority == PromotionConstants.PROMOTION_PRIORITY_EXCLUDE) {
+				
+				for (PromotionRuleBO promotionRuleBO : ruleBOs) {
+					
+				}
+				
+			}
+			
+		}
+		
 		return promotionProfitBO;
 	}
 	
-	private List<List<Object>> sortByPriority(Map<PromotionRuleBO, List<CartStockDTO>> promotionContext) {
+	private Map<Integer, Collection<PromotionRuleBO>> sortByPriority(Map<PromotionRuleBO, List<CartStockDTO>> promotionContext) {
 		Set<PromotionRuleBO> ruleBOs = promotionContext.keySet();
 		List<PromotionRuleBO> ruleBOList = new ArrayList<PromotionRuleBO>(ruleBOs);  
-		Collections.sort(ruleBOList, new Comparator<PromotionRuleBO>() {
-
-			@Override
-			public int compare(PromotionRuleBO o1, PromotionRuleBO o2) {
-				return o1.getPriority().compareTo(o2.getPriority());
-			}
-		});
 		
 		//根据groupId分组, 如果groupId为null, 则放到默认为0的group下  
 		Function<PromotionRuleBO, Integer> fun = new Function<PromotionRuleBO, Integer>() {
@@ -52,10 +69,11 @@ public class BasePromotionRuleProfitService {
 		};
 		Multimap<Integer, PromotionRuleBO> index = Multimaps.index(ruleBOList, fun);
 		Map<Integer, Collection<PromotionRuleBO>> map = index.asMap();  
-		for (Map.Entry<Integer, Collection<PromotionRuleBO>> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + " <---> " + entry.getValue());
+		Map<Integer, Collection<PromotionRuleBO>> sortedMap = new TreeMap<Integer, Collection<PromotionRuleBO>>();
+		for (Integer priority : map.keySet()) {
+			sortedMap.put(priority, map.get(priority));
 		}
 		
-		return null;
+		return sortedMap;
 	}
 }

@@ -17,7 +17,12 @@ public class PromotionProfitBO {
 	/**
 	 * 价格上的优惠
 	 */
-	private List<PromotionProfitStockItemDeduct> stockItemDeducts;
+	private List<PromotionProfitStockItem> stockItems;
+	
+	/**
+	 * 其他可选优惠
+	 */
+	private List<PromotionProfitBO> alternativeProfit;
 
 	public List<PromotionProfitReward> getRewards() {
 		return rewards;
@@ -27,20 +32,28 @@ public class PromotionProfitBO {
 		this.rewards = rewards;
 	}
 
-	public List<PromotionProfitStockItemDeduct> getStockItemDeducts() {
-		return stockItemDeducts;
-	}
-
-	public void setStockItemDeducts(List<PromotionProfitStockItemDeduct> stockItemDeducts) {
-		this.stockItemDeducts = stockItemDeducts;
-	}
-
 	public PromotionProfitPostFee getPromotionProfitPostFee() {
 		return promotionProfitPostFee;
 	}
 
 	public void setPromotionProfitPostFee(PromotionProfitPostFee promotionProfitPostFee) {
 		this.promotionProfitPostFee = promotionProfitPostFee;
+	}
+
+	public List<PromotionProfitBO> getAlternativeProfit() {
+		return alternativeProfit;
+	}
+
+	public void setAlternativeProfit(List<PromotionProfitBO> alternativeProfit) {
+		this.alternativeProfit = alternativeProfit;
+	}
+
+	public List<PromotionProfitStockItem> getStockItems() {
+		return stockItems;
+	}
+
+	public void setStockItems(List<PromotionProfitStockItem> stockItems) {
+		this.stockItems = stockItems;
 	}
 	
 	

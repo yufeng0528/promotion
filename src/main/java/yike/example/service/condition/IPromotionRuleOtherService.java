@@ -5,8 +5,9 @@ import java.util.List;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartCustomerDTO;
 import yike.dto.CartStockDTO;
+import yike.example.service.IPromotionRuleService;
 
-public interface IPromotionRuleOtherService {
+public interface IPromotionRuleOtherService extends IPromotionRuleService{
 
 	/**
 	 * 预成单
@@ -26,9 +27,4 @@ public interface IPromotionRuleOtherService {
 	 */
 	Boolean useStock(Long orderId, Long promotionStockId);
 	
-	/**
-	 * 具体规则promotion_rule的type+sub_type
-	 * @return
-	 */
-	String promotionRuleType();
 }
