@@ -1,4 +1,4 @@
-package yike.example.service;
+package yike.example.service.condition;
 
 import java.util.Collection;
 import java.util.HashMap;
