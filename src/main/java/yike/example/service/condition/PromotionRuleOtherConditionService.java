@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -46,7 +45,8 @@ public class PromotionRuleOtherConditionService {
 					newPromotionContext.put(promotionRuleBO, promotionContext.get(promotionContext));
 				}
 			} else {
-				throw new NotImplementedException("促销其他规则过滤" + promotionRuleBO.getPromotionRule().getType() + "_" + promotionRuleBO.getPromotionRule().getSubType() + "没有实现");
+				logger.info("没有相对应的规则 " + promotionRuleBO.getPromotionRule().getType() + "_" + promotionRuleBO.getPromotionRule().getSubType());
+				newPromotionContext.put(promotionRuleBO, promotionContext.get(promotionContext));
 			}
 		}
 		logger.info("结束其他规则筛选");
