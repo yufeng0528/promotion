@@ -50,44 +50,34 @@ public class CashierProfitService extends BaseCashierRuleService implements IPro
 		for (CartStockDTO cartStockDTO : cartStockDTOs) {
 			totalPrice += cartStockDTO.getShoppingCount() * cartStockDTO.getPrice();
 		}
-		Long avgPromotionValuePer = promotionValue/totalPrice;
+		//最多总价
+		if (promotionValue > totalPrice) {
+			promotionValue = totalPrice;
+		}
 		
 		Long totalDeduct = 0L;
 		int i = 0;
 		for (CartStockDTO cartStockDTO : cartStockDTOs) {
-//			if (i == cartStockDTOs.size() - 1) {
-//				//最后一个 为平均+最后优惠值
-//				if (cartStockDTO.getShoppingCount() > 1) {
-//					Long deductPrice = cartStockDTO.getPrice() - avgPromotionValue;
-//					Long totalProfitPrice = avgPromotionValue * cartStockDTO.getShoppingCount();
-//					
-//					PromotionProfitStockItemDeduct promotionProfitStockItemDeduct = new PromotionProfitStockItemDeduct(cartStockDTO.getId(), cartStockDTO.getPrice(), deductPrice, cartStockDTO.getShoppingCount().intValue(), totalProfitPrice,
-//							promotionId, promotionDesc);
-//					deducts.add(promotionProfitStockItemDeduct);
-//					totalDeduct += totalProfitPrice;
-//				} else {
-//					Long deductPrice = promotionValue - ;
-//					Long totalProfitPrice = avgPromotionValue * cartStockDTO.getShoppingCount();
-//					
-//					PromotionProfitStockItemDeduct promotionProfitStockItemDeduct = new PromotionProfitStockItemDeduct(cartStockDTO.getId(), cartStockDTO.getPrice(), deductPrice, cartStockDTO.getShoppingCount().intValue(), totalProfitPrice,
-//							promotionId, promotionDesc);
-//					deducts.add(promotionProfitStockItemDeduct);
-//					totalDeduct += totalProfitPrice;
-//				}
-//				
-//			} else {
-//				//前面的都平均
-//				Long deductPrice = cartStockDTO.getPrice() - avgPromotionValue;
-//				Long totalProfitPrice = avgPromotionValue * cartStockDTO.getShoppingCount();
-//				
-//				PromotionProfitStockItemDeduct promotionProfitStockItemDeduct = new PromotionProfitStockItemDeduct(cartStockDTO.getId(), cartStockDTO.getPrice(), deductPrice, cartStockDTO.getShoppingCount().intValue(), totalProfitPrice,
-//						promotionId, promotionDesc);
-//				deducts.add(promotionProfitStockItemDeduct);
-//				totalDeduct += totalProfitPrice;
-//			}
+			if (i == cartStockDTOs.size() - 1) {
+				Long totalProfitPrice = promotionValue - totalDeduct;
+				Long deductPrice = cartStockDTO.getPrice() - totalProfitPrice / cartStockDTO.getShoppingCount();
+				
+				PromotionProfitStockItemDeduct promotionProfitStockItemDeduct = new PromotionProfitStockItemDeduct(cartStockDTO.getId(), cartStockDTO.getPrice(), deductPrice, cartStockDTO.getShoppingCount().intValue(), totalProfitPrice,
+						promotionId, promotionDesc);
+				deducts.add(promotionProfitStockItemDeduct);
+			} else {
+				//前面的都平均
+				Long totalProfitPrice = (long) (1.0 * cartStockDTO.getShoppingCount() * cartStockDTO.getPrice() / totalPrice * promotionValue);
+				Long deductPrice = cartStockDTO.getPrice() - totalProfitPrice / cartStockDTO.getShoppingCount();
+				
+				PromotionProfitStockItemDeduct promotionProfitStockItemDeduct = new PromotionProfitStockItemDeduct(cartStockDTO.getId(), cartStockDTO.getPrice(), deductPrice, cartStockDTO.getShoppingCount().intValue(), totalProfitPrice,
+						promotionId, promotionDesc);
+				deducts.add(promotionProfitStockItemDeduct);
+				totalDeduct += totalProfitPrice;
+			}
 		}
 		
-		profitStockItem.setTotalDeduct(totalDeduct);
+		profitStockItem.setTotalDeduct(promotionValue);
 		
 		return promotionProfitBO;
 	}
