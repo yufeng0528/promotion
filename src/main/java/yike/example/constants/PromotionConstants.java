@@ -43,6 +43,8 @@ public class PromotionConstants {
 	 */
 	public static byte PROMOTION_RULE_SUBTYPE_REWARD_COUPON = 0;
 	
+	public static byte PROMOTION_RULE_SUBTYPE_DISCOUNT_NORMAL = 0;
+	
 	public static int PROMOTION_PRIORITY_EXCLUDE = 0;
 	
 }

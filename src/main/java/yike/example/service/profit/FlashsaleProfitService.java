@@ -53,7 +53,7 @@ public class FlashsaleProfitService extends BaseFlashsaleRuleService implements 
 		JSONObject jsonObject = JSONObject.parseObject(profit.getValue());
 		Long promotionValue = jsonObject.getLong("promotionValue");
 		String promotionDesc = "闪购优惠价-" + new BigDecimal(1.0 * promotionValue / 100).setScale(2, RoundingMode.HALF_UP).toString() + "元";
-		Long totalProfitPrice = promotionValue;
+		Long totalProfitPrice = cartStockDTO.getPrice() - promotionValue;
 		PromotionProfitStockItemDeduct promotionProfitStockItemDeduct = new PromotionProfitStockItemDeduct(cartStockDTO.getId(), cartStockDTO.getPrice(), promotionValue, cartStockDTO.getShoppingCount().intValue(), totalProfitPrice,
 				promotionId, promotionDesc);
 		deducts.add(promotionProfitStockItemDeduct);

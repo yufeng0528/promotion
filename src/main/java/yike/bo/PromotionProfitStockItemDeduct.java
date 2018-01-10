@@ -8,7 +8,7 @@ public class PromotionProfitStockItemDeduct {
 	private Long id;
 	
 	/**
-	 * 优惠了多少钱
+	 * 优惠价
 	 */
 	private Long deductPrice;
 	
