@@ -25,6 +25,14 @@ public class PromotionProfitReward {
 	 * 关联的具体优惠
 	 */
 	private List<Long> referIds;
+	
+	public PromotionProfitReward(){}
+	
+	public PromotionProfitReward(Long promotionId, Integer promotionRuleSubType, String rewardDesc) {
+		this.promotionId = promotionId;
+		this.promotionRuleSubType = promotionRuleSubType;
+		this.rewardDesc = rewardDesc;
+	}
 
 	public Long getPromotionId() {
 		return promotionId;

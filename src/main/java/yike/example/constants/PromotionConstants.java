@@ -28,9 +28,20 @@ public class PromotionConstants {
 	public static byte PROMOTION_RULE_TYPE_FREE_POSTFEE = 4;
 	
 	
+	/**
+	 * 闪购
+	 */
 	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_FLASHSALE = 0;
 	
+	/**
+	 * 砍价
+	 */
 	public static byte PROMOTION_RULE_SUBTYPE_SPECIAL_BARGIAN = 1;
+	
+	/**
+	 * 送优惠券
+	 */
+	public static byte PROMOTION_RULE_SUBTYPE_REWARD_COUPON = 0;
 	
 	public static int PROMOTION_PRIORITY_EXCLUDE = 0;
 	

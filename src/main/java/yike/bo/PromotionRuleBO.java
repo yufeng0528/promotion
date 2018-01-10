@@ -14,6 +14,8 @@ public class PromotionRuleBO {
 	private Integer priority;
 	
 	private Integer level;
+	
+	
 
 	public PromotionRule getPromotionRule() {
 		return promotionRule;

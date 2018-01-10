@@ -13,6 +13,11 @@ public class PromotionProfitStockItemDeduct {
 	private Long deductPrice;
 	
 	/**
+	 * 有几个享受了优惠
+	 */
+	private Integer shoppingCount;
+	
+	/**
 	 * 总优惠
 	 */
 	private Long totalProfitPrice;
@@ -23,12 +28,13 @@ public class PromotionProfitStockItemDeduct {
 	
 	public PromotionProfitStockItemDeduct(){}
 	
-	public PromotionProfitStockItemDeduct(Long id, Long oldPrice, Long deductPrice, Long totalProfitPrice, Long promotionId, String promotionDesc) {
+	public PromotionProfitStockItemDeduct(Long id, Long oldPrice, Long deductPrice, Integer shoppingCount, Long totalProfitPrice, Long promotionId, String promotionDesc) {
 		this.id = id;
 		this.deductPrice = deductPrice;
 		this.totalProfitPrice = totalProfitPrice;
 		this.promotionId = promotionId;
 		this.promotionDesc = promotionDesc;
+		this.shoppingCount = shoppingCount;
 	}
 
 	public Long getId() {
@@ -69,6 +75,14 @@ public class PromotionProfitStockItemDeduct {
 
 	public void setPromotionDesc(String promotionDesc) {
 		this.promotionDesc = promotionDesc;
+	}
+
+	public Integer getShoppingCount() {
+		return shoppingCount;
+	}
+
+	public void setShoppingCount(Integer shoppingCount) {
+		this.shoppingCount = shoppingCount;
 	}
 	
 	
