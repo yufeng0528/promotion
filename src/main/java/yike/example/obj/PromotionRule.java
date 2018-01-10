@@ -20,6 +20,14 @@ public class PromotionRule {
     private Byte type;
 
     private Integer subType;
+    
+    public PromotionRule() {
+    	
+    }
+    
+    public PromotionRule(Long promotionId) {
+    	this.promotionId = promotionId;
+    }
 
     public Long getId() {
         return id;

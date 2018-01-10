@@ -4,6 +4,7 @@ import java.util.List;
 
 import yike.example.obj.PromotionRule;
 import yike.example.obj.PromotionRuleCondition;
+import yike.example.obj.PromotionRuleProfit;
 
 public class PromotionRuleBO {
 
@@ -15,7 +16,7 @@ public class PromotionRuleBO {
 	
 	private Integer level;
 	
-	
+	private PromotionRuleProfit promotionRuleProfit;
 
 	public PromotionRule getPromotionRule() {
 		return promotionRule;
@@ -47,6 +48,14 @@ public class PromotionRuleBO {
 
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+
+	public PromotionRuleProfit getPromotionRuleProfit() {
+		return promotionRuleProfit;
+	}
+
+	public void setPromotionRuleProfit(PromotionRuleProfit promotionRuleProfit) {
+		this.promotionRuleProfit = promotionRuleProfit;
 	}
 	
 	
