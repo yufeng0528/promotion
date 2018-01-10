@@ -3,8 +3,6 @@ package yike.example.service.profit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -29,15 +27,12 @@ import yike.example.service.rule.BaseRewardCouponRuleService;
 @Service
 public class RewardCouponProfitService extends BaseRewardCouponRuleService implements IPromotionRuleProfitService {
 
-	@Resource
-	private PromotionRuleProfitService promotionRuleProfitService;
-	
 	@Override
 	public PromotionProfitBO handleProfit(PromotionRuleBO promotionRuleBo, List<CartStockDTO> cartStockDTOs) {
 		PromotionProfitBO promotionProfitBO = new PromotionProfitBO();
 		
 		Long promotionId = promotionRuleBo.getPromotionRule().getPromotionId();
-		PromotionRuleProfit profit = promotionRuleProfitService.getByPromotionId(promotionRuleBo.getPromotionRule().getSupplierId(), promotionRuleBo.getPromotionRule().getPromotionId(), promotionRuleBo.getLevel());
+		PromotionRuleProfit profit = promotionRuleBo.getPromotionRuleProfit();
 		
 		List<PromotionProfitReward> rewards = new ArrayList<>();
 		JSONObject jsonObject = JSONObject.parseObject(profit.getValue());

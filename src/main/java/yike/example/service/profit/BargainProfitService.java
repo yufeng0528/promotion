@@ -5,8 +5,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -30,9 +28,6 @@ import yike.example.service.rule.BaseBargainRuleService;
 @Service
 public class BargainProfitService extends BaseBargainRuleService implements IPromotionRuleProfitService {
 	
-	@Resource
-	private PromotionRuleProfitService promotionRuleProfitService;
-
 	@Override
 	public PromotionProfitBO handleProfit(PromotionRuleBO promotionRuleBo, List<CartStockDTO> cartStockDTOs) {
 		if (cartStockDTOs.size() != 1) {
@@ -48,7 +43,7 @@ public class BargainProfitService extends BaseBargainRuleService implements IPro
 		promotionProfitBO.setStockItems(promotionProfitStockItems);
 		
 		Long promotionId = promotionRuleBo.getPromotionRule().getPromotionId();
-		PromotionRuleProfit profit = promotionRuleProfitService.getByPromotionId(promotionRuleBo.getPromotionRule().getSupplierId(), promotionRuleBo.getPromotionRule().getPromotionId(), promotionRuleBo.getLevel());
+		PromotionRuleProfit profit = promotionRuleBo.getPromotionRuleProfit();
 		
 		Long totalDeduct = 0L;
 		CartStockDTO cartStockDTO = cartStockDTOs.get(0);
