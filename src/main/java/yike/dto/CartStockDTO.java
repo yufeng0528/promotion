@@ -1,5 +1,9 @@
 package yike.dto;
 
+import java.util.List;
+
+import yike.bo.PromotionProfitBO;
+
 /**
  * 购物车商品上下文
  * 
@@ -32,6 +36,28 @@ public class CartStockDTO {
 	 * 单价
 	 */
 	private Long price;
+	
+	/**
+	 * 特价优惠
+	 */
+	private PromotionProfitBO specialPromotion;
+	
+	/**
+	 * 组合优惠
+	 */
+	private PromotionProfitBO groupPromotion;
+	
+	/**
+	 * 其他可选优惠
+	 */
+	private List<PromotionProfitBO> alternativeGroupPromotion;
+	
+	/**
+	 * 为满足的优惠
+	 */
+	private List<PromotionProfitBO> unsatfiyGroupPromotion;
+	
+	
 
 	public Long getId() {
 		return id;
@@ -71,6 +97,38 @@ public class CartStockDTO {
 
 	public void setPrice(Long price) {
 		this.price = price;
+	}
+
+	public PromotionProfitBO getSpecialPromotion() {
+		return specialPromotion;
+	}
+
+	public void setSpecialPromotion(PromotionProfitBO specialPromotion) {
+		this.specialPromotion = specialPromotion;
+	}
+
+	public List<PromotionProfitBO> getAlternativeGroupPromotion() {
+		return alternativeGroupPromotion;
+	}
+
+	public void setAlternativeGroupPromotion(List<PromotionProfitBO> alternativeGroupPromotion) {
+		this.alternativeGroupPromotion = alternativeGroupPromotion;
+	}
+
+	public List<PromotionProfitBO> getUnsatfiyGroupPromotion() {
+		return unsatfiyGroupPromotion;
+	}
+
+	public void setUnsatfiyGroupPromotion(List<PromotionProfitBO> unsatfiyGroupPromotion) {
+		this.unsatfiyGroupPromotion = unsatfiyGroupPromotion;
+	}
+
+	public PromotionProfitBO getGroupPromotion() {
+		return groupPromotion;
+	}
+
+	public void setGroupPromotion(PromotionProfitBO groupPromotion) {
+		this.groupPromotion = groupPromotion;
 	}
 
 }

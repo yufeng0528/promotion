@@ -26,12 +26,18 @@ public class PromotionProfitReward {
 	 */
 	private List<Long> referIds;
 	
+	/**
+	 * 总优惠
+	 */
+	private Long totalProfitPrice;
+	
 	public PromotionProfitReward(){}
 	
-	public PromotionProfitReward(Long promotionId, Integer promotionRuleSubType, String rewardDesc) {
+	public PromotionProfitReward(Long promotionId, Long totalProfitPrice, Integer promotionRuleSubType, String rewardDesc) {
 		this.promotionId = promotionId;
 		this.promotionRuleSubType = promotionRuleSubType;
 		this.rewardDesc = rewardDesc;
+		this.setTotalProfitPrice(totalProfitPrice);
 	}
 
 	public Long getPromotionId() {
@@ -64,6 +70,14 @@ public class PromotionProfitReward {
 
 	public void setReferIds(List<Long> referIds) {
 		this.referIds = referIds;
+	}
+
+	public Long getTotalProfitPrice() {
+		return totalProfitPrice;
+	}
+
+	public void setTotalProfitPrice(Long totalProfitPrice) {
+		this.totalProfitPrice = totalProfitPrice;
 	}
 	
 	

@@ -45,6 +45,19 @@ public class PromotionConstants {
 	
 	public static byte PROMOTION_RULE_SUBTYPE_DISCOUNT_NORMAL = 0;
 	
-	public static int PROMOTION_PRIORITY_EXCLUDE = 0;
+	/**
+	 * 特价
+	 */
+	public static int PROMOTION_PRIORITY_SEPECIAL = 0;
+	
+	/**
+	 * 组合
+	 */
+	public static int PROMOTION_PRIORITY_GROUP = 2;
+	
+	/**
+	 * 订单优惠
+	 */
+	public static int PROMOTION_PRIORITY_ORDER = 4;
 	
 }

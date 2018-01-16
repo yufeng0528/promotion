@@ -3,6 +3,10 @@ package yike.example.service.profit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -27,19 +31,34 @@ import yike.example.service.rule.BaseRewardCouponRuleService;
 @Service
 public class RewardCouponProfitService extends BaseRewardCouponRuleService implements IPromotionRuleProfitService {
 
+	private static Logger logger = LoggerFactory.getLogger(RewardCouponProfitService.class);
+	
+	@Resource
+	private ProfitCompareService profitCompareService;
+	
 	@Override
 	public PromotionProfitBO handleProfit(PromotionRuleBO promotionRuleBo, List<CartStockDTO> cartStockDTOs) {
 		PromotionProfitBO promotionProfitBO = new PromotionProfitBO();
 		
 		Long promotionId = promotionRuleBo.getPromotionRule().getPromotionId();
 		PromotionRuleProfit profit = promotionRuleBo.getPromotionRuleProfit();
-		
-		List<PromotionProfitReward> rewards = new ArrayList<>();
 		JSONObject jsonObject = JSONObject.parseObject(profit.getValue());
 		String desc = jsonObject.getString("desc");
-		PromotionProfitReward promotionProfitReward = new PromotionProfitReward(promotionId, (int)PromotionConstants.PROMOTION_RULE_SUBTYPE_REWARD_COUPON, desc);
-		rewards.add(promotionProfitReward);
-		promotionProfitBO.setRewards(rewards);
+		Long couponValue = jsonObject.getLong("couponValue");
+		logger.info("开始检查优惠冲突 this:" + promotionId);
+		
+		for (CartStockDTO cartStockDTO : cartStockDTOs) {
+			if (!profitCompareService.checkGroupPromotion(cartStockDTO, couponValue)) {
+				return null;
+			}
+		}
+		
+		PromotionProfitReward promotionProfitReward = new PromotionProfitReward(promotionId, couponValue, (int)PromotionConstants.PROMOTION_RULE_SUBTYPE_REWARD_COUPON, desc);
+		promotionProfitBO.setReward(promotionProfitReward);
+		
+		for (CartStockDTO cartStockDTO : cartStockDTOs) {
+			cartStockDTO.setGroupPromotion(promotionProfitBO);
+		}
 		
 		return promotionProfitBO;
 	}

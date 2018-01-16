@@ -8,19 +8,28 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
+import yike.bo.PromotionContext;
 import yike.bo.PromotionProfitBO;
 import yike.bo.PromotionRuleBO;
+import yike.dto.CartDTO;
 import yike.dto.CartStockDTO;
 import yike.example.constants.PromotionConstants;
+import yike.example.exception.IllegalBizException;
+import yike.example.obj.PromotionRule;
 
 @Service
 public class BasePromotionRuleProfitService {
+	
+	@Resource
+	private PromotionRuleProfitServiceFactory profitServiceFactory;
 
 	/**
 	 * 得到所有优惠收益
@@ -39,11 +48,20 @@ public class BasePromotionRuleProfitService {
 		for (Iterator<Integer> it = sortedMap.keySet().iterator(); it.hasNext();) {
 			Integer priority = it.next();
 			Collection<PromotionRuleBO> ruleBOs = sortedMap.get(priority);
-			
-			if (priority == PromotionConstants.PROMOTION_PRIORITY_EXCLUDE) {
-				
-				for (PromotionRuleBO promotionRuleBO : ruleBOs) {
-					
+
+			for (PromotionRuleBO promotionRuleBO : ruleBOs) {
+				PromotionRule promotionRule = promotionRuleBO.getPromotionRule();
+				IPromotionRuleProfitService profitService = profitServiceFactory.getProfitService(promotionRule.getType(), promotionRule.getSubType());
+				List<CartStockDTO> cartStockDTOs = promotionContext.get(promotionRuleBO);
+				if (priority == PromotionConstants.PROMOTION_PRIORITY_SEPECIAL) {
+					profitService.handleProfit(promotionRuleBO, cartStockDTOs); //特价优惠选最优
+				} else if (priority == PromotionConstants.PROMOTION_PRIORITY_GROUP) {
+					profitService.handleProfit(promotionRuleBO, cartStockDTOs); //组合优惠选最优
+				} else if (priority == PromotionConstants.PROMOTION_PRIORITY_ORDER) {
+					PromotionProfitBO orderProfit = profitService.handleProfit(promotionRuleBO, cartStockDTOs); //比如全场或者包邮 订单优惠都计算
+					CartDTO cartDTO = PromotionContext.getCartDTO();
+					//设置订单优惠
+					//TODO
 				}
 				
 			}

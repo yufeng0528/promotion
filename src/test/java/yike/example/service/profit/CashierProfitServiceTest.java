@@ -3,23 +3,29 @@ package yike.example.service.profit;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSONObject;
 
+import yike.DemoApplication;
 import yike.bo.PromotionProfitBO;
-import yike.bo.PromotionProfitStockItem;
-import yike.bo.PromotionProfitStockItemDeduct;
 import yike.bo.PromotionRuleBO;
 import yike.dto.CartStockDTO;
 import yike.example.obj.PromotionRule;
 import yike.example.obj.PromotionRuleProfit;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest(classes=DemoApplication.class)
 public class CashierProfitServiceTest {
+	
+	@Resource
+	private CashierProfitService cashierProfitService;
 
 	@Test
 	public void contextLoads() {
@@ -33,7 +39,6 @@ public class CashierProfitServiceTest {
 	 */
 	@Test
 	public void handleProfit1() {
-		CashierProfitService cashierProfitService = new CashierProfitService();
 		PromotionRuleBO promotionRuleBo = new PromotionRuleBO();
 		
 		PromotionRuleProfit promotionRuleProfit = new PromotionRuleProfit();
@@ -53,12 +58,11 @@ public class CashierProfitServiceTest {
 		cartStockDTO.setShoppingCount(3L);
 		cartStockDTOs.add(cartStockDTO);
 		
-		PromotionProfitBO promotionProfitBO = cashierProfitService.handleProfit(promotionRuleBo, cartStockDTOs);
+		cashierProfitService.handleProfit(promotionRuleBo, cartStockDTOs);
+		
+		PromotionProfitBO promotionProfitBO = cartStockDTOs.get(0).getGroupPromotion();
 		Assert.assertNotNull(promotionProfitBO);
-		PromotionProfitStockItem stockItem = promotionProfitBO.getStockItems().get(0);
-		List<PromotionProfitStockItemDeduct> itemDeducts = stockItem.getList();
-		Assert.assertEquals(itemDeducts.size(), 2);
-		Assert.assertEquals(itemDeducts.get(0).getTotalProfitPrice().intValue(), 4);
+		Assert.assertEquals(promotionProfitBO.getPromotionProfitStockItemDeduct().getTotalProfitPrice().intValue(), 4);
 	}
 	
 	/**
@@ -66,7 +70,6 @@ public class CashierProfitServiceTest {
 	 */
 	@Test
 	public void handleProfit2() {
-		CashierProfitService cashierProfitService = new CashierProfitService();
 		PromotionRuleBO promotionRuleBo = new PromotionRuleBO();
 		
 		PromotionRuleProfit promotionRuleProfit = new PromotionRuleProfit();
@@ -86,11 +89,10 @@ public class CashierProfitServiceTest {
 		cartStockDTO.setShoppingCount(3L);
 		cartStockDTOs.add(cartStockDTO);
 		
-		PromotionProfitBO promotionProfitBO = cashierProfitService.handleProfit(promotionRuleBo, cartStockDTOs);
+		cashierProfitService.handleProfit(promotionRuleBo, cartStockDTOs);
+		
+		PromotionProfitBO promotionProfitBO = cartStockDTOs.get(0).getGroupPromotion();
 		Assert.assertNotNull(promotionProfitBO);
-		PromotionProfitStockItem stockItem = promotionProfitBO.getStockItems().get(0);
-		List<PromotionProfitStockItemDeduct> itemDeducts = stockItem.getList();
-		Assert.assertEquals(itemDeducts.size(), 2);
-		Assert.assertEquals(itemDeducts.get(0).getTotalProfitPrice().intValue(), 20);
+		Assert.assertEquals(promotionProfitBO.getPromotionProfitStockItemDeduct().getTotalProfitPrice().intValue(), 20);
 	}
 }

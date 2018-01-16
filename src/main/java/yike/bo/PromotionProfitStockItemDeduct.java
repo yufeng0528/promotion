@@ -3,21 +3,6 @@ package yike.bo;
 public class PromotionProfitStockItemDeduct {
 
 	/**
-	 * 购物车id
-	 */
-	private Long id;
-	
-	/**
-	 * 优惠价
-	 */
-	private Long deductPrice;
-	
-	/**
-	 * 有几个享受了优惠
-	 */
-	private Integer shoppingCount;
-	
-	/**
 	 * 总优惠
 	 */
 	private Long totalProfitPrice;
@@ -28,29 +13,10 @@ public class PromotionProfitStockItemDeduct {
 	
 	public PromotionProfitStockItemDeduct(){}
 	
-	public PromotionProfitStockItemDeduct(Long id, Long oldPrice, Long deductPrice, Integer shoppingCount, Long totalProfitPrice, Long promotionId, String promotionDesc) {
-		this.id = id;
-		this.deductPrice = deductPrice;
+	public PromotionProfitStockItemDeduct(Long totalProfitPrice, Long promotionId, String promotionDesc) {
 		this.totalProfitPrice = totalProfitPrice;
 		this.promotionId = promotionId;
 		this.promotionDesc = promotionDesc;
-		this.shoppingCount = shoppingCount;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getDeductPrice() {
-		return deductPrice;
-	}
-
-	public void setDeductPrice(Long deductPrice) {
-		this.deductPrice = deductPrice;
 	}
 
 	public Long getTotalProfitPrice() {
@@ -77,13 +43,4 @@ public class PromotionProfitStockItemDeduct {
 		this.promotionDesc = promotionDesc;
 	}
 
-	public Integer getShoppingCount() {
-		return shoppingCount;
-	}
-
-	public void setShoppingCount(Integer shoppingCount) {
-		this.shoppingCount = shoppingCount;
-	}
-	
-	
 }
